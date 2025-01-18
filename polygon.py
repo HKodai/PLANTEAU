@@ -81,12 +81,10 @@ def distance_3d(x1, y1, z1, x2, y2, z2):
     return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2 + (z2 - z1) ** 2)
 
 
-def find_nearest_buildings(
-    buildings, target_lat, target_lon, target_alt, from_code, to_code, top_n=10
-):
-    transformer = Transformer.from_crs(6697, 6677, always_xy=False)
-    tx, ty = transformer.transform(target_lat, target_lon)
-    tz = target_alt
+def find_nearest_buildings(buildings, lat, lon, alt, from_code, to_code, top_n):
+    transformer = Transformer.from_crs(from_code, to_code, always_xy=False)
+    tx, ty = transformer.transform(lat, lon)
+    tz = alt
 
     dist_list = []
     for bldg in buildings:
