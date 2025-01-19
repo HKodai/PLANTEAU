@@ -8,14 +8,14 @@ from plant import Gingko
 
 
 def simulate(
-    gml, lat, lon, alt, from_code, to_code, top_n, start_date, days, initial_height
+    dir, lat, lon, alt, from_code, to_code, top_n, start_date, days, initial_height
 ):
     t = time.time()
     print("start simulation.")
 
     # 1) パースして 3D頂点リストを取得
     print("parsing citygml...")
-    buildings = parse_citygml_lod1_solids(gml, from_code, to_code)
+    buildings = parse_citygml_lod1_solids(dir, lat, lon, from_code, to_code)
     print(f"parsed citygml in {time.time() - t:.2f} sec.")
     t = time.time()
 
@@ -54,7 +54,7 @@ def simulate(
 if __name__ == "__main__":
     # ======== 設定部分 ========
     # CityGMLファイルのパス
-    gml = "data/bunkyo/udx/bldg/53394650_bldg_6697_op.gml"
+    dir = "data/13100_tokyo23-ku_2020_citygml_4_2_op/udx/bldg/"
     # 植物の緯度・経度・標高
     lat = 35.713887740033876
     lon = 139.76016861370172
@@ -71,6 +71,6 @@ if __name__ == "__main__":
     # ==========================
 
     df = simulate(
-        gml, lat, lon, alt, from_code, to_code, top_n, start, days, initial_height
+        dir, lat, lon, alt, from_code, to_code, top_n, start, days, initial_height
     )
     df.to_csv("result.csv", index=False)

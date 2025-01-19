@@ -122,7 +122,7 @@ if __name__ == "__main__":
     from polygon import parse_citygml_lod1_solids, find_nearest_buildings
 
     # ======== 設定部分 ========
-    gml = "data/bunkyo/udx/bldg/53394650_bldg_6697_op.gml"
+    dir = "data/13100_tokyo23-ku_2020_citygml_4_2_op/udx/bldg/"
     # 植物の緯度・経度・標高
     lat = 35.713887740033876
     lon = 139.76016861370172
@@ -135,7 +135,7 @@ if __name__ == "__main__":
     # =========================
 
     # 1) CityGML (LOD1) をパースして 3D頂点リストを取得
-    buildings = parse_citygml_lod1_solids(gml, from_code, to_code)
+    buildings = parse_citygml_lod1_solids(dir, lat, lon, from_code, to_code)
 
     # 2) 指定座標に近い建物トップNを取得
     nearest = find_nearest_buildings(
