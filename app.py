@@ -11,20 +11,17 @@ def run_simulation():
     from_code = 6697
     to_code = 6677
     data = request.json
-    lat = data.get("lat")
-    lon = data.get("lon")
-    alt = data.get("alt")
-    top_n = data.get("top_n", 20)
+    tree_types = data.get("tree_types")
+    positions = data.get("positions")
+    initial_heights = data.get("initial_heights")
+    top_n = data.get("top_n", 10)
     start = pd.to_datetime(data.get("start"))
     days = data.get("days")
-    initial_height = data.get("initial_height")
 
     # シミュレーション実行
-    df = simulate(
-        dir, lat, lon, alt, from_code, to_code, top_n, start, days, initial_height
-    )
-    heights = df["height"].tolist()
-    return jsonify({"heights": heights})
+    timeline = simulate(
+        dir, tree_types, positions, initial_heights, from_code, to_code, top_n, start, days)
+    return jsonify({"timeline": timeline.to_dict(orient="records")})
 
 
 if __name__ == "__main__":

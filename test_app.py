@@ -2,12 +2,11 @@ import requests
 
 url = "http://127.0.0.1:5000/simulate"
 data = {
-    "lat": 35.713887740033876,
-    "lon": 139.76016861370172,
-    "alt": 25,
+    "tree_types": ["Gingko", "Cherry"],
+    "positions": [[35.713887740033876, 139.76016861370172, 25], [35.713887740033876, 139.76016861370172, 25]],
+    "initial_heights": [0.5, 0.5],
     "start": "2025-01-18",
-    "days": 3650,
-    "initial_height": 0.5,
+    "days": 365,
 }
 
 response = requests.post(url, json=data)
